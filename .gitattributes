@@ -1,0 +1,46 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+# Must be the first line in the .gitattributes file
+* text=auto
+
+# Declare files that will always have LF line endings on commit and checkout.
+*.java eol=lf
+
+*.js eol=lf
+*.vue eol=lf
+*.json eol=lf
+*.css eol=lf
+*.scss eol=lf
+
+*.properties eol=lf
+*.xml eol=lf
+*.xsd eol=lf
+*.ftl eol=lf
+*.html eol=lf
+
+*.sh eol=lf
+*.conf eol=lf
+*.logrotate eol=lf
+*.py eol=lf
+
+*.md eol=lf
+*.adoc eol=lf
+*.txt eol=lf
+*.yml eol=lf
+
+.gitignore eol=lf
+.gitattributes eol=lf
+
+# Declare files that will always have CRLF line endings on commit and checkout.
+*.bat eol=crlf
+*.cmd eol=crlf
+
+# Denote all files that are truly binary and should not be modified.
+*.jar binary
+*.exe binary
+*.jpg binary
+*.png binary
+*.eot binary
+*.svg binary
+*.ttf binary
+*.woff binary
+*.woff2 binary

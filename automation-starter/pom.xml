@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <name>automation-starter</name>
+    <artifactId>automation-starter</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <parent>
+        <groupId>my-automation</groupId>
+        <artifactId>automation-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../automation-parent</relativePath>
+    </parent>
+
+    <properties>
+        <start-class>auto.AutomateApplication</start-class>
+        <loader-path>lib,browser</loader-path>
+    </properties>
+
+    <build>
+        <plugins>
+
+            <!--Spring Boot Maven 插件，用来生成可执行 jar 包-->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <executable>true</executable>
+                    <includes>
+                        <include>
+                            <groupId>null</groupId>
+                            <artifactId>null</artifactId>
+                        </include>
+                    </includes>
+                    <layout>ZIP</layout>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <skip>false</skip>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory> ${project.build.directory}/lib3p </outputDirectory>
+                            <!-- 此处还根据需求添加其他配置，如excludeTransitive、stripVersion等 -->
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--处理 MANIFEST.MF 文件-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <!--在 MANIFEST.MF 文件中添加入口项 Loader-Path: lib/ ，这样就可以加载工作目录下 lib 子目录中的 jar 包了，而不必再在 Java 启动参数中添加 -Dloader.path=lib/ -->
+                        <manifestEntries>
+                            <Loader-Path>lib/,lib3p/</Loader-Path>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!--starter.jar 包不需要 install 到本地 Maven 库-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <configuration>
+                    <!--不 install 到本地 Maven 库-->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+
+            <!--starter.jar 包不需要 deploy 到远程 Maven 库-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <configuration>
+                    <!--不 deploy 到远程 Maven 库-->
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">automation</title>
+</head>
+<body>
+<div>
+    <div class="button-group" style="margin-bottom:10px">
+    <button class="button-firefox-ui">
+        <a href="/ui_automation/start?browser=&db=mysql&tenant=t01&isSaas=false">ui执行</a>
+    </button>
+    <button class="button-chrome-ui">
+        <a href="/ui_automation/start?browser=chrome&db=mysql&tenant=t01&isSaas=false">谷歌 UI 执行</a>
+    </button>
+    <button class="button-api">
+        <a href="/interface_automation/start?db=mysql&tenant=t01&isSaas=false">interface执行</a>
+    </button>
+    <button class="button-status">
+        <a href="/report/check">是否正在执行中</a>
+    </button>
+    </br>
+</div>
+    <iframe class="iframeId" src="http://" style="width:100%;height:500px">
+
+    </iframe>
+</div>
+</body>
+</html>
