@@ -13,6 +13,7 @@ import java.util.List;
  * verify，封装断言，避免失败中断测试用例执行
  * 适用一个用例中需要验证多个相互独立的数据结果，即使之前的验证失败了后续的验证也需要执行
  * 最终在报告中显示该条用例状态为失败（在listener中处理），并通过日志进行定位失败原因
+ *
  * @author Halley.Fang
  */
 public class AssertionRuntime {

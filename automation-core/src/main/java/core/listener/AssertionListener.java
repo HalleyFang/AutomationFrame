@@ -131,8 +131,8 @@ public class AssertionListener extends TestListenerAdapter implements ResultHand
 
     @Override
     public void onFinish(ITestContext testContext) {
-            super.onFinish(testContext);
-            testContext = contextHandle(testContext);
+        super.onFinish(testContext);
+        testContext = contextHandle(testContext);
             /*// List of test results which we will delete later
             ArrayList<ITestResult> testsToBeRemoved = new ArrayList<ITestResult>();
             // collect all id's from passed test

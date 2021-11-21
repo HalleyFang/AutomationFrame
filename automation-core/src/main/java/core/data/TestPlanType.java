@@ -8,7 +8,7 @@ public enum TestPlanType {
 
     private Integer type;
 
-    TestPlanType(Integer type){
+    TestPlanType(Integer type) {
         this.type = type;
     }
 

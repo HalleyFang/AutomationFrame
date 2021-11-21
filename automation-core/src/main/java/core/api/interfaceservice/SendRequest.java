@@ -14,22 +14,22 @@ import java.util.Map;
 @Service
 public class SendRequest {
 
-    public ResponseDetail postRequest(URI uri, Map<String, String> mapPost, String dataFilePath, Map<String,Object> bodyMap,JsonAnalysis jsonAnalysis) throws URISyntaxException {
+    public ResponseDetail postRequest(URI uri, Map<String, String> mapPost, String dataFilePath, Map<String, Object> bodyMap, JsonAnalysis jsonAnalysis) throws URISyntaxException {
         ReadFile readFile = new ReadFile();
         GsonChange gsonChange = new GsonChange();
         DoHttp doHttp = new DoHttp();
-        if(uri == null){
+        if (uri == null) {
             return null;
         }
         doHttp.setUrl(uri);
-        if(mapPost != null && !mapPost.isEmpty()){
+        if (mapPost != null && !mapPost.isEmpty()) {
             doHttp.setMapPost(mapPost);
         }
-        if(dataFilePath != null) {
+        if (dataFilePath != null) {
 //            File file = new File(dataFilePath);
             String body = readFile.readFile(dataFilePath);
             if (bodyMap != null && !bodyMap.isEmpty()) {
-                if(jsonAnalysis instanceof JsonAnalysis) {
+                if (jsonAnalysis instanceof JsonAnalysis) {
                     body = jsonAnalysis.analysisJson(body, bodyMap, gsonChange);
                 }
             }
@@ -41,27 +41,27 @@ public class SendRequest {
 
     public ResponseDetail postRequest(URI uri, Map<String, String> mapPost, String body) {
         DoHttp doHttp = new DoHttp();
-        if(uri == null){
+        if (uri == null) {
             return null;
         }
         doHttp.setUrl(uri);
-        if(mapPost != null && !mapPost.isEmpty()){
+        if (mapPost != null && !mapPost.isEmpty()) {
             doHttp.setMapPost(mapPost);
         }
-        if(body != null) {
+        if (body != null) {
             doHttp.setRequestBody(body);
         }
         ResponseDetail responseDetail = doHttp.doPost();
         return responseDetail;
     }
 
-    public ResponseDetail getRequest(URI uri, Map<String, String> mapGet){
+    public ResponseDetail getRequest(URI uri, Map<String, String> mapGet) {
         DoHttp doHttp = new DoHttp();
-        if(uri == null){
+        if (uri == null) {
             return null;
         }
         doHttp.setUrl(uri);
-        if(mapGet != null && !mapGet.isEmpty()){
+        if (mapGet != null && !mapGet.isEmpty()) {
             doHttp.setMapGet(mapGet);
         }
         ResponseDetail responseDetail = doHttp.doGet();

@@ -82,13 +82,14 @@ public class DoHttp {
 
     /**
      * Get
+     *
      * @return
      */
-    public ResponseDetail doGet(){
+    public ResponseDetail doGet() {
         ResponseDetail responseDetail = new ResponseDetail();
         CloseableHttpClient httpClient = getHttpClient(isHttps);
         HttpGet httpGet = new HttpGet(url);
-        if(mapGet!=null && !mapGet.isEmpty()) {
+        if (mapGet != null && !mapGet.isEmpty()) {
             for (Map.Entry<String, String> entry : mapGet.entrySet()) {
                 httpGet.setHeader(entry.getKey(), entry.getValue());
             }
@@ -107,21 +108,21 @@ public class DoHttp {
 
             // 将上面的配置信息 运用到这个Get请求里
             httpGet.setConfig(requestConfig);
-            String headerMsg = "GET: "+ url +"\n";
-            for (Header header : httpGet.getAllHeaders()){
+            String headerMsg = "GET: " + url + "\n";
+            for (Header header : httpGet.getAllHeaders()) {
                 headerMsg += header.toString() + "\n";
             }
-            logger.debug("++++++++++RequestHeader++++++++++:"+headerMsg);
+            logger.debug("++++++++++RequestHeader++++++++++:" + headerMsg);
             response = httpClient.execute(httpGet);
             HttpEntity responseEntity = response.getEntity();
             responseDetail.setStatus(response.getStatusLine().getStatusCode());
             if (responseEntity != null) {
                 responseDetail.setResponse_msg(EntityUtils.toString(responseEntity));
             }
-            logger.debug("++++++++++ResponseHeader++++++++++:"+responseDetail.getStatus());
+            logger.debug("++++++++++ResponseHeader++++++++++:" + responseDetail.getStatus());
         } catch (ClientProtocolException e) {
             e.printStackTrace();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -141,28 +142,29 @@ public class DoHttp {
 
     /**
      * Post
+     *
      * @return
      */
     public ResponseDetail doPost() {
         ResponseDetail responseDetail = new ResponseDetail();
         CloseableHttpClient httpClient = getHttpClient(isHttps);
         HttpPost httpPost = new HttpPost(url);
-        if(mapPost!=null && !mapPost.isEmpty()) {
+        if (mapPost != null && !mapPost.isEmpty()) {
             for (Map.Entry<String, String> entry : mapPost.entrySet()) {
                 httpPost.setHeader(entry.getKey(), entry.getValue());
             }
         }
         httpPost.setHeader("Content-Type", "application/json;charset=utf8");
         httpPost.setHeader("Accept-Language", "zh-CN,zh;q=0.9,en;q=0.8");
-        if(requestBody!=null) {
+        if (requestBody != null) {
             StringEntity entity = new StringEntity(requestBody, "UTF-8");
             httpPost.setEntity(entity);
         }
         CloseableHttpResponse response = null;
         try {
-            String headerMsg = "POST: "+ url +"\n";
-            for (Header header : httpPost.getAllHeaders()){
-                headerMsg += header.toString()+"\n";
+            String headerMsg = "POST: " + url + "\n";
+            for (Header header : httpPost.getAllHeaders()) {
+                headerMsg += header.toString() + "\n";
             }
 //            logger.debug("RequestHeader:\n"+headerMsg);
             response = httpClient.execute(httpPost);
@@ -175,14 +177,14 @@ public class DoHttp {
             }
 //            logger.debug("ResponseCode:"+ url + "\n" + "status:" + responseDetail.getStatus()+ "\n" + responseDetail.getResponse_msg());
             logger.debug("----------------------------------POST START-------------------------------------------" + "\n"
-                    + "++++RequestHeader:++++\n"+headerMsg
-                    +"++++ResponseCode:++++\n"+ url + "\n" + "status:" + responseDetail.getStatus()+ "\n"
-                    + responseDetail.getResponse_msg() +"\n"+
+                    + "++++RequestHeader:++++\n" + headerMsg
+                    + "++++ResponseCode:++++\n" + url + "\n" + "status:" + responseDetail.getStatus() + "\n"
+                    + responseDetail.getResponse_msg() + "\n" +
                     "----------------------------------POST END-------------------------------------------"
             );
         } catch (ClientProtocolException e) {
             e.printStackTrace();
-        }  catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         } finally {
             try {
@@ -200,7 +202,7 @@ public class DoHttp {
         return responseDetail;
     }
 
-    private CloseableHttpClient getHttpClient(boolean isHttps){
+    private CloseableHttpClient getHttpClient(boolean isHttps) {
         CloseableHttpClient httpClient;
         if (isHttps) {
             SSLConnectionSocketFactory sslSocketFactory;
@@ -227,25 +229,16 @@ public class DoHttp {
     /**
      * HTTPS辅助方法, 为HTTPS请求 创建SSLSocketFactory实例、TrustManager实例
      *
-     * @param needVerifyCa
-     *         是否需要检验CA证书(即:是否需要检验服务器的身份)
-     * @param caInputStream
-     *         CA证书。(若不需要检验证书，那么此处传null即可)
-     * @param cAalias
-     *         别名。(若不需要检验证书，那么此处传null即可)
-     *         注意:别名应该是唯一的， 别名不要和其他的别名一样，否者会覆盖之前的相同别名的证书信息。别名即key-value中的key。
-     *
+     * @param needVerifyCa  是否需要检验CA证书(即:是否需要检验服务器的身份)
+     * @param caInputStream CA证书。(若不需要检验证书，那么此处传null即可)
+     * @param cAalias       别名。(若不需要检验证书，那么此处传null即可)
+     *                      注意:别名应该是唯一的， 别名不要和其他的别名一样，否者会覆盖之前的相同别名的证书信息。别名即key-value中的key。
      * @return SSLConnectionSocketFactory实例
-     * @throws NoSuchAlgorithmException
-     *         异常信息
-     * @throws CertificateException
-     *         异常信息
-     * @throws KeyStoreException
-     *         异常信息
-     * @throws IOException
-     *         异常信息
-     * @throws KeyManagementException
-     *         异常信息
+     * @throws NoSuchAlgorithmException 异常信息
+     * @throws CertificateException     异常信息
+     * @throws KeyStoreException        异常信息
+     * @throws IOException              异常信息
+     * @throws KeyManagementException   异常信息
      * @date 2019/6/11 19:52
      */
     private static SSLConnectionSocketFactory getSocketFactory(boolean needVerifyCa, InputStream caInputStream, String cAalias)
@@ -292,15 +285,13 @@ public class DoHttp {
      * 获取(密钥及证书)仓库
      * 注:该仓库用于存放 密钥以及证书
      *
-     * @param caInputStream
-     *         CA证书(此证书应由要访问的服务端提供)
-     * @param cAalias
-     *         别名
-     *         注意:别名应该是唯一的， 别名不要和其他的别名一样，否者会覆盖之前的相同别名的证书信息。别名即key-value中的key。
+     * @param caInputStream CA证书(此证书应由要访问的服务端提供)
+     * @param cAalias       别名
+     *                      注意:别名应该是唯一的， 别名不要和其他的别名一样，否者会覆盖之前的相同别名的证书信息。别名即key-value中的key。
      * @return 密钥、证书 仓库
-     * @throws KeyStoreException 异常信息
-     * @throws CertificateException 异常信息
-     * @throws IOException 异常信息
+     * @throws KeyStoreException        异常信息
+     * @throws CertificateException     异常信息
+     * @throws IOException              异常信息
      * @throws NoSuchAlgorithmException 异常信息
      * @date 2019/6/11 18:48
      */
@@ -315,4 +306,4 @@ public class DoHttp {
         return keyStore;
     }
 
-    }
+}

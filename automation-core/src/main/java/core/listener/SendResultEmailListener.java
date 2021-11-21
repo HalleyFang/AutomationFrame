@@ -125,7 +125,7 @@ public class SendResultEmailListener implements ITestListener, ResultHandle {
                 "\t<td align=\"center\" bgcolor=\"#FFFF00\">" + k + "</td>\n" +
                 "  </tr>\n" +
                 "</table>\n" +
-                "<br>" + "<a href=\""+ AppConf.getReportUrl() +"\">报告详细</a>" +
+                "<br>" + "<a href=\"" + AppConf.getReportUrl() + "\">报告详细</a>" +
                 "\n" +
                 "</body>\n" +
                 "</html>";

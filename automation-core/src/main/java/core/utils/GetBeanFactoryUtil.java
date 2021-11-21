@@ -1,10 +1,8 @@
 package core.utils;
 
-import core.email.SendEmail;
-
 public class GetBeanFactoryUtil {
 
-    public static Object getBean(Class tClass){
+    public static Object getBean(Class tClass) {
         if (AppConf.isDebug()) {
             try {
                 return tClass.newInstance();

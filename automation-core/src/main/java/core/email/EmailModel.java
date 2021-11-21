@@ -28,7 +28,6 @@ public class EmailModel {
         return filePath;
     }
 
-
     public void setToList(List<String> toList) {
         this.toList = toList;
     }

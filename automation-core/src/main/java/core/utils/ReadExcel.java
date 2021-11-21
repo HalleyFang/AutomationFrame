@@ -1,13 +1,11 @@
 package core.utils;
 
-import com.google.gson.JsonObject;
 import core.data.TestCaseType;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
@@ -16,7 +14,6 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ReadExcel {
@@ -34,14 +31,14 @@ public class ReadExcel {
             + File.separator + "api.xls";
 
     public static Object[][] readExcelObject(String sheetName, TestCaseType type) {
-        if(TestCaseType.UI_CASE.equals(type)) {
+        if (TestCaseType.UI_CASE.equals(type)) {
             return readExcelObject(uiFilePath, sheetName);
         }
         return readExcelObject(apiFilePath, sheetName);
     }
 
-        public static Object[][] readExcelObject(String filePath,String sheetName) {
-        List<List<Object>> list = readExcel(filePath,sheetName);
+    public static Object[][] readExcelObject(String filePath, String sheetName) {
+        List<List<Object>> list = readExcel(filePath, sheetName);
         List<Object> tl = list.get(0);
         int length = tl.size();
         Object[][] objects = new Object[list.size()][length];
@@ -54,11 +51,11 @@ public class ReadExcel {
         return objects;
     }
 
-    public static List<List<Object>> readExcel(String sheetName,TestCaseType type) {
-        if(TestCaseType.UI_CASE.equals(type)) {
+    public static List<List<Object>> readExcel(String sheetName, TestCaseType type) {
+        if (TestCaseType.UI_CASE.equals(type)) {
             return readExcel(uiFilePath, sheetName);
         }
-        return readExcel(apiFilePath,sheetName);
+        return readExcel(apiFilePath, sheetName);
     }
 
     public static List<List<Object>> readExcel(String filePath, String sheetName) {
@@ -124,10 +121,10 @@ public class ReadExcel {
                     } else if (cellType == CellType.BOOLEAN) {
                         tmp.add(cell.getBooleanCellValue());
                     } else {
-                    tmp.add(cell.getStringCellValue());
+                        tmp.add(cell.getStringCellValue());
                     }
                 }
-                if (tmp.size()>0) {
+                if (tmp.size() > 0) {
                     list.add(tmp);
                 }
             }
@@ -177,7 +174,7 @@ public class ReadExcel {
                         tmp.add(cell.getStringCellValue());
                     }
                 }
-                if (tmp.size()>0) {
+                if (tmp.size() > 0) {
                     list.add(tmp);
                 }
             }

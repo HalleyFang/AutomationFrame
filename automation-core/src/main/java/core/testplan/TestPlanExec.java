@@ -40,7 +40,7 @@ public class TestPlanExec {
         executor.submit(() -> {
             Long threadId = Thread.currentThread().getId();
             //记录同一种类型的测试，同一平台同一浏览器同时只能存在一个任务在执行
-            runStatus.put(threadId, RunStatusUtil.runStr(browser,db,tenant));
+            runStatus.put(threadId, RunStatusUtil.runStr(browser, db, tenant));
             Map<String, Object> runParameters = new HashMap<>();
             try {
                 InitCache.initCache();

@@ -29,7 +29,8 @@ public class SendMail implements SendMailService {
 
     /**
      * 简单文本邮件
-     * @param to 收件人
+     *
+     * @param to      收件人
      * @param subject 主题
      * @param content 内容
      */
@@ -39,7 +40,7 @@ public class SendMail implements SendMailService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
-            messageHelper = new MimeMessageHelper(message, true,"UTF-8");
+            messageHelper = new MimeMessageHelper(message, true, "UTF-8");
             //邮件发送人
             messageHelper.setFrom(from);
             //邮件接收人
@@ -57,7 +58,8 @@ public class SendMail implements SendMailService {
 
     /**
      * html邮件
-     * @param to 收件人
+     *
+     * @param to      收件人
      * @param subject 主题
      * @param content 内容
      */
@@ -67,7 +69,7 @@ public class SendMail implements SendMailService {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper;
         try {
-            messageHelper = new MimeMessageHelper(message, true,"UTF-8");
+            messageHelper = new MimeMessageHelper(message, true, "UTF-8");
             //邮件发送人
             messageHelper.setFrom(from);
             //邮件接收人
@@ -87,16 +89,17 @@ public class SendMail implements SendMailService {
 
     /**
      * 带附件的邮件
-     * @param to 收件人
-     * @param subject 主题
-     * @param content 内容
+     *
+     * @param to       收件人
+     * @param subject  主题
+     * @param content  内容
      * @param filePath 附件
      */
     @Override
     public void sendAttachmentsMail(String to, String subject, String content, String filePath) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
-            MimeMessageHelper helper = new MimeMessageHelper(message, true,"UTF-8");
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setFrom(from);
             helper.setTo(to);
             helper.setSubject(subject);

@@ -40,7 +40,7 @@ public class MobileOperates extends TouchAction implements MobileTouch {
 
     @Override
     public void opMultiTouch(TouchAction... actions) {
-        for(TouchAction action:actions){
+        for (TouchAction action : actions) {
             mAction.add(action);
         }
         mAction.perform();
